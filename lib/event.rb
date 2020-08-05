@@ -38,4 +38,11 @@ class Event
       total_inventory[item][:quantity] > 50 && total_inventory[item][:food_trucks].count > 1
     end
   end
+
+  def sorted_item_list
+    items = total_inventory.keys.map do |item|
+      item.name
+    end
+    items.sort
+  end
 end
