@@ -1,4 +1,5 @@
 require 'minitest/autorun'
+require 'mocha/minitest'
 require 'minitest/nyan_cat'
 require 'pry'
 require './lib/food_truck'
@@ -6,6 +7,11 @@ require './lib/item'
 require './lib/event'
 
 class EventTest < MiniTest::Test
+
+  def setup
+    stubbed_date = Date.parse("2020-02-24")
+    Date.stubs(:today).returns(stubbed_date)
+  end
 
   def test_it_exists_and_has_attributes
     event = Event.new("South Pearl Street Farmers Market")
@@ -179,9 +185,7 @@ class EventTest < MiniTest::Test
   end
 
   def test_it_has_a_date
-    skip
     event = Event.new("South Pearl Street Farmers Market")
-    event.date
-
+    assert_equal "24/02/2020", event.date
   end
 end
