@@ -22,4 +22,8 @@ class FoodTruck
     end
     total
   end
+
+  def sell(item, quantity)
+    @inventory[item] -= quantity
+  end
 end
