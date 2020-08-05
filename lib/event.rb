@@ -45,4 +45,21 @@ class Event
     end
     items.sort
   end
+
+  def sell(item, quantity)
+    if total_inventory[item].nil? || total_inventory[item][:quantity] < quantity
+      return false
+    else
+      total_inventory[item][:food_trucks].each do |food_truck|
+        if food_truck.check_stock(item) < quantity
+          stock= food_truck.check_stock(item)
+          food_truck.sell(item, stock)
+          quantity -= stock
+        else
+          food_truck.sell(item, quantity)
+        end
+      end
+    end
+    true
+  end
 end
